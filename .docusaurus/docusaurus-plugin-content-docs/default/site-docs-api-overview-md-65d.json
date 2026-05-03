@@ -1,0 +1,27 @@
+{
+  "id": "api/overview",
+  "title": "API Reference",
+  "description": "Интерактивная документация REST API доступна на отдельной странице.",
+  "source": "@site/docs/api/overview.md",
+  "sourceDirName": "api",
+  "slug": "/api/overview",
+  "permalink": "/smart-home-planner/docs/api/overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "overview",
+    "title": "API Reference",
+    "sidebar_label": "API Reference"
+  },
+  "sidebar": "mainSidebar",
+  "previous": {
+    "title": "AsyncAPI (RabbitMQ)",
+    "permalink": "/smart-home-planner/docs/architecture/async-api"
+  },
+  "next": {
+    "title": "Коды ошибок",
+    "permalink": "/smart-home-planner/docs/api/error-codes"
+  }
+}

@@ -50,65 +50,64 @@
     "specProps": "specProps---smart-home-planner-api-reference-71-b-1d8",
     "layoutProps": "layoutProps---smart-home-planner-api-reference-529-5a9"
   },
-  "/smart-home-planner/-954": {
+  "/smart-home-planner/docs-152": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
-      "plugin": "plugin---smart-home-planner-aba-772"
+      "plugin": "plugin---smart-home-planner-docsaba-c29"
     }
   },
-  "/smart-home-planner/-cff": {
+  "/smart-home-planner/docs-853": {
     "__comp": "__comp---theme-doc-version-roota-7-b-5de",
-    "__props": "__props---smart-home-planner-bef-5ec"
+    "__props": "__props---smart-home-planner-docs-242-375"
   },
-  "/smart-home-planner/-8a0": {
+  "/smart-home-planner/docs-019": {
     "__comp": "__comp---theme-doc-roota-94-67a"
   },
-  "/smart-home-planner/architecture/api-spec-aa5": {
+  "/smart-home-planner/docs/api/error-codes-680": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-architecture-api-spec-2-b-6-93a"
+    "content": "content---smart-home-planner-docs-api-error-codese-68-ab3"
   },
-  "/smart-home-planner/architecture/async-api-aba": {
+  "/smart-home-planner/docs/api/overview-c88": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-architecture-async-api-9-ff-34c"
+    "content": "content---smart-home-planner-docs-api-overview-65-d-ff3"
   },
-  "/smart-home-planner/architecture/erd-3ce": {
+  "/smart-home-planner/docs/architecture/async-api-4fa": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-architecture-erd-105-b44"
+    "content": "content---smart-home-planner-docs-architecture-async-api-9-ff-3e0"
   },
-  "/smart-home-planner/architecture/storage-c29": {
+  "/smart-home-planner/docs/architecture/erd-d9c": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-architecture-storage-2-f-2-ece"
+    "content": "content---smart-home-planner-docs-architecture-erd-105-c77"
   },
-  "/smart-home-planner/integrations/platformization-5f8": {
+  "/smart-home-planner/docs/architecture/storage-30e": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-integrations-platformization-7-c-4-ed8"
+    "content": "content---smart-home-planner-docs-architecture-storage-2-f-2-47e"
   },
-  "/smart-home-planner/integrations/sequence-diagrams-205": {
+  "/smart-home-planner/docs/integrations/platformization-025": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-integrations-sequence-diagramsfcf-3a0"
+    "content": "content---smart-home-planner-docs-integrations-platformization-7-c-4-5a4"
   },
-  "/smart-home-planner/overview/business-goals-5ec": {
+  "/smart-home-planner/docs/integrations/sequence-diagrams-f39": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-overview-business-goals-1-d-7-c8c"
+    "content": "content---smart-home-planner-docs-integrations-sequence-diagramsfcf-e22"
   },
-  "/smart-home-planner/overview/product-description-e86": {
+  "/smart-home-planner/docs/intro-1ed": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-overview-product-description-0-a-5-d80"
+    "content": "content---smart-home-planner-docs-intro-0-e-3-91a"
   },
-  "/smart-home-planner/overview/stakeholders-a05": {
+  "/smart-home-planner/docs/requirements/nfr-fr-cf3": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-overview-stakeholders-0-fe-3ec"
+    "content": "content---smart-home-planner-docs-requirements-nfr-frf-38-abf"
   },
-  "/smart-home-planner/requirements/nfr-fr-1f3": {
+  "/smart-home-planner/docs/requirements/use-cases-f48": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-requirements-nfr-frf-38-773"
+    "content": "content---smart-home-planner-docs-requirements-use-casesf-40-2bc"
   },
-  "/smart-home-planner/requirements/use-cases-948": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-requirements-use-casesf-40-e7c"
-  },
-  "/smart-home-planner/-759": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---smart-home-planner-c-37-ec8"
+  "/smart-home-planner/-448": {
+    "__comp": "__comp---site-src-pages-index-jsc-4-f-f99",
+    "__context": {
+      "plugin": "plugin---smart-home-planner-a-74-7ca"
+    },
+    "config": "config---smart-home-planner-5-e-9-9b5"
   }
 }

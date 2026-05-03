@@ -1,0 +1,613 @@
+openapi: 3.0.3
+info:
+  title: Smart Home Planner API
+  version: 1.0.0
+  description: |
+    API сервиса умного планировщика домов и квартир.
+
+    Позволяет пользователям создавать проекты планировки, управлять ими
+    и взаимодействовать с AI-помощником для генерации и редактирования планов.
+  contact:
+    name: Smart Home Planner Team
+    email: support@smartplanner.com
+
+servers:
+  - url: https://api.smartplanner.com/v1
+    description: Production
+  - url: https://staging.api.smartplanner.com/v1
+    description: Staging
+
+tags:
+  - name: projects
+    description: Управление проектами планировки
+  - name: ai
+    description: AI-генерация и команды помощника
+  - name: layers
+    description: Инженерные слои (электрика, водопровод, канализация)
+  - name: auth
+    description: Аутентификация и регистрация
+
+paths:
+
+  /auth/send-otp:
+    post:
+      tags: [auth]
+      summary: Отправить OTP-код
+      description: Отправляет одноразовый код подтверждения на email или телефон пользователя.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [contact]
+              properties:
+                contact:
+                  type: string
+                  description: Email или номер телефона
+                  example: user@example.com
+      responses:
+        '200':
+          description: OTP-код отправлен
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Код отправлен на user@example.com
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /auth/register:
+    post:
+      tags: [auth]
+      summary: Зарегистрировать пользователя
+      description: Создаёт аккаунт после подтверждения OTP. Возвращает JWT-токен.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+            example:
+              contact: user@example.com
+              otp: "123456"
+              password: mysecretpassword
+      responses:
+        '201':
+          description: Аккаунт создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          description: Пользователь уже зарегистрирован
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: USER_ALREADY_EXISTS
+                  message: Аккаунт с таким email уже существует
+
+  /auth/login:
+    post:
+      tags: [auth]
+      summary: Авторизовать пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [contact, password]
+              properties:
+                contact:
+                  type: string
+                  example: user@example.com
+                password:
+                  type: string
+                  example: mysecretpassword
+      responses:
+        '200':
+          description: Авторизация успешна
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Неверный email или пароль
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Неверный email или пароль
+
+  /projects:
+    get:
+      tags: [projects]
+      summary: Список проектов пользователя
+      description: Возвращает все проекты текущего пользователя с возможностью фильтрации по статусу.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/ProjectStatus'
+          description: Фильтр по статусу проекта
+      responses:
+        '200':
+          description: Список проектов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectMeta'
+              example:
+                - id: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                  name: Моя квартира
+                  status: IN_PROGRESS
+                  dimensions:
+                    width: 10
+                    length: 8
+                  createdAt: "2025-04-01T12:00:00Z"
+                  updatedAt: "2025-04-15T09:30:00Z"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      tags: [projects]
+      summary: Создать проект вручную
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+            example:
+              name: Новая квартира
+              dimensions:
+                width: 12
+                length: 9
+      responses:
+        '201':
+          description: Проект создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectMeta'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Достигнут лимит проектов для Free-аккаунта
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: PROJECT_LIMIT_REACHED
+                  message: Для Free-аккаунта максимум 3 активных проекта
+
+  /projects/generate:
+    post:
+      tags: [ai]
+      summary: Создать проект через AI-промпт
+      description: |
+        Асинхронно генерирует план помещения на основе текстового описания.
+        Сразу возвращает `taskId`, по которому можно отслеживать статус.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AICommand'
+            example:
+              commandText: Сгенерируй квартиру 10 на 8 метров с двумя спальнями и кухней-гостиной
+      responses:
+        '201':
+          description: Задача принята, генерация запущена
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskId:
+                    type: string
+                    format: uuid
+                    example: 123e4567-e89b-12d3-a456-426614174000
+                  projectId:
+                    type: string
+                    format: uuid
+                    example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                  status:
+                    type: string
+                    example: PENDING
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          description: Превышен дневной лимит AI-запросов
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: AI_QUOTA_EXCEEDED
+                  message: Дневной лимит AI-запросов исчерпан. Сбросится в 00:00 UTC
+
+  /projects/{projectId}:
+    get:
+      tags: [projects]
+      summary: Загрузить данные проекта
+      description: Возвращает полные данные проекта включая данные холста для редактора.
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: Данные проекта
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectFull'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [projects]
+      summary: Сохранить изменения проекта
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectFull'
+      responses:
+        '200':
+          description: Проект сохранён
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectMeta'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /projects/{projectId}/ai-commands:
+    post:
+      tags: [ai]
+      summary: Отправить команду AI-помощнику
+      description: |
+        Синхронная обработка текстовой команды в контексте открытого проекта.
+        AI интерпретирует команду и возвращает обновлённый план.
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AICommand'
+            example:
+              commandText: Сделай кухню больше на 2 метра
+      responses:
+        '200':
+          description: Изменения применены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectFull'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          description: AI не смог интерпретировать команду
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: AI_COMMAND_AMBIGUOUS
+                  message: Команда неоднозначна. Уточните что именно нужно изменить
+        '429':
+          description: Превышен дневной лимит AI-запросов
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /projects/{projectId}/layers:
+    get:
+      tags: [layers]
+      summary: Получить данные инженерного слоя
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+        - name: type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [ELECTRICITY, WATER, SEWAGE]
+          description: |
+            Тип инженерного слоя:
+            * `ELECTRICITY` — электропроводка, розетки, выключатели
+            * `WATER` — водоснабжение, трубы
+            * `SEWAGE` — канализация
+      responses:
+        '200':
+          description: Данные слоя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EngineeringLayer'
+              example:
+                layerType: ELECTRICITY
+                elements:
+                  - id: aabb1234-0000-0000-0000-000000000001
+                    type: socket
+                    x: 2.5
+                    y: 1.0
+                  - id: aabb1234-0000-0000-0000-000000000002
+                    type: switch
+                    x: 0.1
+                    y: 2.2
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: UUID проекта
+
+  responses:
+    BadRequest:
+      description: Некорректный запрос — ошибка валидации
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: VALIDATION_ERROR
+              message: Поле dimensions.width обязательно и должно быть больше 0
+    Unauthorized:
+      description: Требуется авторизация — JWT-токен отсутствует или истёк
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: UNAUTHORIZED
+              message: JWT-токен отсутствует или истёк
+    Forbidden:
+      description: Нет доступа к чужому ресурсу
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: FORBIDDEN
+              message: У вас нет доступа к этому проекту
+    NotFound:
+      description: Ресурс не найден
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: PROJECT_NOT_FOUND
+              message: Проект не найден
+
+  schemas:
+    ProjectStatus:
+      type: string
+      enum: [DRAFT, IN_PROGRESS, COMPLETED]
+      description: |
+        Статус проекта:
+        * `DRAFT` — черновик, не начат
+        * `IN_PROGRESS` — в работе
+        * `COMPLETED` — завершён
+
+    ProjectMeta:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+        name:
+          type: string
+          example: Моя квартира
+        status:
+          $ref: '#/components/schemas/ProjectStatus'
+        dimensions:
+          type: object
+          properties:
+            width:
+              type: number
+              example: 10
+            length:
+              type: number
+              example: 8
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    ProjectFull:
+      allOf:
+        - $ref: '#/components/schemas/ProjectMeta'
+        - type: object
+          properties:
+            canvasData:
+              type: object
+              description: JSON с данными холста — стены, комнаты, объекты
+              example:
+                walls: []
+                rooms: []
+                assets: []
+
+    CreateProjectRequest:
+      type: object
+      required: [name, dimensions]
+      properties:
+        name:
+          type: string
+          example: Новая квартира
+        dimensions:
+          type: object
+          required: [width, length]
+          properties:
+            width:
+              type: number
+              minimum: 0.1
+              maximum: 100
+              example: 12
+            length:
+              type: number
+              minimum: 0.1
+              maximum: 100
+              example: 9
+
+    AICommand:
+      type: object
+      required: [commandText]
+      properties:
+        commandText:
+          type: string
+          minLength: 3
+          example: Сделай кухню больше
+
+    EngineeringLayer:
+      type: object
+      properties:
+        layerType:
+          type: string
+          enum: [ELECTRICITY, WATER, SEWAGE]
+        elements:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              type:
+                type: string
+                example: socket
+              x:
+                type: number
+              y:
+                type: number
+
+    RegisterRequest:
+      type: object
+      required: [contact, otp, password]
+      properties:
+        contact:
+          type: string
+          example: user@example.com
+        otp:
+          type: string
+          example: "123456"
+        password:
+          type: string
+          minLength: 8
+          example: mysecretpassword
+
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: JWT-токен для авторизации
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            email:
+              type: string
+              example: user@example.com
+            subscription:
+              type: string
+              enum: [FREE, PREMIUM]
+              example: FREE
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: VALIDATION_ERROR
+            message:
+              type: string
+              example: Описание ошибки
+            details:
+              type: object
+              description: Дополнительные данные об ошибке
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT-токен, полученный при авторизации через /auth/login

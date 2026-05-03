@@ -1,0 +1,24 @@
+{
+  "id": "intro",
+  "title": "Smart Home Planner",
+  "description": "Карточка продукта",
+  "source": "@site/docs/intro.md",
+  "sourceDirName": ".",
+  "slug": "/intro",
+  "permalink": "/smart-home-planner/docs/intro",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "intro",
+    "title": "Smart Home Planner",
+    "sidebar_label": "Карточка продукта",
+    "slug": "/intro"
+  },
+  "sidebar": "mainSidebar",
+  "next": {
+    "title": "Use Cases",
+    "permalink": "/smart-home-planner/docs/requirements/use-cases"
+  }
+}

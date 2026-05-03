@@ -1,0 +1,27 @@
+{
+  "id": "api/error-codes",
+  "title": "Коды ошибок",
+  "description": "HTTP-статусы",
+  "source": "@site/docs/api/error-codes.md",
+  "sourceDirName": "api",
+  "slug": "/api/error-codes",
+  "permalink": "/smart-home-planner/docs/api/error-codes",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "error-codes",
+    "title": "Коды ошибок",
+    "sidebar_label": "Коды ошибок"
+  },
+  "sidebar": "mainSidebar",
+  "previous": {
+    "title": "API Reference",
+    "permalink": "/smart-home-planner/docs/api/overview"
+  },
+  "next": {
+    "title": "Sequence-диаграммы",
+    "permalink": "/smart-home-planner/docs/integrations/sequence-diagrams"
+  }
+}

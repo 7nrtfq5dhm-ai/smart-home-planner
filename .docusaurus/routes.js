@@ -43,93 +43,87 @@ export default [
     exact: true
   },
   {
-    path: '/smart-home-planner/',
-    component: ComponentCreator('/smart-home-planner/', '954'),
+    path: '/smart-home-planner/docs',
+    component: ComponentCreator('/smart-home-planner/docs', '152'),
     routes: [
       {
-        path: '/smart-home-planner/',
-        component: ComponentCreator('/smart-home-planner/', 'cff'),
+        path: '/smart-home-planner/docs',
+        component: ComponentCreator('/smart-home-planner/docs', '853'),
         routes: [
           {
-            path: '/smart-home-planner/',
-            component: ComponentCreator('/smart-home-planner/', '8a0'),
+            path: '/smart-home-planner/docs',
+            component: ComponentCreator('/smart-home-planner/docs', '019'),
             routes: [
               {
-                path: '/smart-home-planner/architecture/api-spec',
-                component: ComponentCreator('/smart-home-planner/architecture/api-spec', 'aa5'),
+                path: '/smart-home-planner/docs/api/error-codes',
+                component: ComponentCreator('/smart-home-planner/docs/api/error-codes', '680'),
                 exact: true,
                 sidebar: "mainSidebar"
               },
               {
-                path: '/smart-home-planner/architecture/async-api',
-                component: ComponentCreator('/smart-home-planner/architecture/async-api', 'aba'),
+                path: '/smart-home-planner/docs/api/overview',
+                component: ComponentCreator('/smart-home-planner/docs/api/overview', 'c88'),
                 exact: true,
                 sidebar: "mainSidebar"
               },
               {
-                path: '/smart-home-planner/architecture/erd',
-                component: ComponentCreator('/smart-home-planner/architecture/erd', '3ce'),
+                path: '/smart-home-planner/docs/architecture/async-api',
+                component: ComponentCreator('/smart-home-planner/docs/architecture/async-api', '4fa'),
                 exact: true,
                 sidebar: "mainSidebar"
               },
               {
-                path: '/smart-home-planner/architecture/storage',
-                component: ComponentCreator('/smart-home-planner/architecture/storage', 'c29'),
+                path: '/smart-home-planner/docs/architecture/erd',
+                component: ComponentCreator('/smart-home-planner/docs/architecture/erd', 'd9c'),
                 exact: true,
                 sidebar: "mainSidebar"
               },
               {
-                path: '/smart-home-planner/integrations/platformization',
-                component: ComponentCreator('/smart-home-planner/integrations/platformization', '5f8'),
+                path: '/smart-home-planner/docs/architecture/storage',
+                component: ComponentCreator('/smart-home-planner/docs/architecture/storage', '30e'),
                 exact: true,
                 sidebar: "mainSidebar"
               },
               {
-                path: '/smart-home-planner/integrations/sequence-diagrams',
-                component: ComponentCreator('/smart-home-planner/integrations/sequence-diagrams', '205'),
+                path: '/smart-home-planner/docs/integrations/platformization',
+                component: ComponentCreator('/smart-home-planner/docs/integrations/platformization', '025'),
                 exact: true,
                 sidebar: "mainSidebar"
               },
               {
-                path: '/smart-home-planner/overview/business-goals',
-                component: ComponentCreator('/smart-home-planner/overview/business-goals', '5ec'),
+                path: '/smart-home-planner/docs/integrations/sequence-diagrams',
+                component: ComponentCreator('/smart-home-planner/docs/integrations/sequence-diagrams', 'f39'),
                 exact: true,
                 sidebar: "mainSidebar"
               },
               {
-                path: '/smart-home-planner/overview/product-description',
-                component: ComponentCreator('/smart-home-planner/overview/product-description', 'e86'),
+                path: '/smart-home-planner/docs/intro',
+                component: ComponentCreator('/smart-home-planner/docs/intro', '1ed'),
                 exact: true,
                 sidebar: "mainSidebar"
               },
               {
-                path: '/smart-home-planner/overview/stakeholders',
-                component: ComponentCreator('/smart-home-planner/overview/stakeholders', 'a05'),
+                path: '/smart-home-planner/docs/requirements/nfr-fr',
+                component: ComponentCreator('/smart-home-planner/docs/requirements/nfr-fr', 'cf3'),
                 exact: true,
                 sidebar: "mainSidebar"
               },
               {
-                path: '/smart-home-planner/requirements/nfr-fr',
-                component: ComponentCreator('/smart-home-planner/requirements/nfr-fr', '1f3'),
+                path: '/smart-home-planner/docs/requirements/use-cases',
+                component: ComponentCreator('/smart-home-planner/docs/requirements/use-cases', 'f48'),
                 exact: true,
                 sidebar: "mainSidebar"
-              },
-              {
-                path: '/smart-home-planner/requirements/use-cases',
-                component: ComponentCreator('/smart-home-planner/requirements/use-cases', '948'),
-                exact: true,
-                sidebar: "mainSidebar"
-              },
-              {
-                path: '/smart-home-planner/',
-                component: ComponentCreator('/smart-home-planner/', '759'),
-                exact: true
               }
             ]
           }
         ]
       }
     ]
+  },
+  {
+    path: '/smart-home-planner/',
+    component: ComponentCreator('/smart-home-planner/', '448'),
+    exact: true
   },
   {
     path: '*',

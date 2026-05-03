@@ -1,27 +1,27 @@
 {
   "id": "architecture/async-api",
-  "title": "Асинхронный API (AsyncAPI)",
-  "description": "Зачем асинхронность?",
+  "title": "AsyncAPI — RabbitMQ",
+  "description": "Зачем нужна асинхронность",
   "source": "@site/docs/architecture/async-api.md",
   "sourceDirName": "architecture",
   "slug": "/architecture/async-api",
-  "permalink": "/smart-home-planner/architecture/async-api",
+  "permalink": "/smart-home-planner/docs/architecture/async-api",
   "draft": false,
   "unlisted": false,
   "tags": [],
   "version": "current",
   "frontMatter": {
     "id": "async-api",
-    "title": "Асинхронный API (AsyncAPI)",
+    "title": "AsyncAPI — RabbitMQ",
     "sidebar_label": "AsyncAPI (RabbitMQ)"
   },
   "sidebar": "mainSidebar",
   "previous": {
     "title": "Хранение данных",
-    "permalink": "/smart-home-planner/architecture/storage"
+    "permalink": "/smart-home-planner/docs/architecture/storage"
   },
   "next": {
-    "title": "Sequence-диаграммы",
-    "permalink": "/smart-home-planner/integrations/sequence-diagrams"
+    "title": "API Reference",
+    "permalink": "/smart-home-planner/docs/api/overview"
   }
 }

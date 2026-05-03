@@ -1,11 +1,11 @@
 {
   "id": "requirements/use-cases",
   "title": "Use Cases",
-  "description": "UC-01: Регистрация нового пользователя",
+  "description": "UC-01 — Регистрация нового пользователя",
   "source": "@site/docs/requirements/use-cases.md",
   "sourceDirName": "requirements",
   "slug": "/requirements/use-cases",
-  "permalink": "/smart-home-planner/requirements/use-cases",
+  "permalink": "/smart-home-planner/docs/requirements/use-cases",
   "draft": false,
   "unlisted": false,
   "tags": [],
@@ -13,15 +13,15 @@
   "frontMatter": {
     "id": "use-cases",
     "title": "Use Cases",
-    "sidebar_label": "Use Cases (UC)"
+    "sidebar_label": "Use Cases"
   },
   "sidebar": "mainSidebar",
   "previous": {
-    "title": "Стейкхолдеры",
-    "permalink": "/smart-home-planner/overview/stakeholders"
+    "title": "Карточка продукта",
+    "permalink": "/smart-home-planner/docs/intro"
   },
   "next": {
     "title": "FR и NFR",
-    "permalink": "/smart-home-planner/requirements/nfr-fr"
+    "permalink": "/smart-home-planner/docs/requirements/nfr-fr"
   }
 }

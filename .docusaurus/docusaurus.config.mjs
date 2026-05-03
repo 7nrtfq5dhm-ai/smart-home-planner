@@ -14,23 +14,6 @@ export default {
   "deploymentBranch": "gh-pages",
   "trailingSlash": false,
   "onBrokenLinks": "warn",
-  "markdown": {
-    "mermaid": true,
-    "hooks": {
-      "onBrokenMarkdownLinks": "warn",
-      "onBrokenMarkdownImages": "throw"
-    },
-    "format": "mdx",
-    "emoji": true,
-    "mdx1Compat": {
-      "comments": true,
-      "admonitions": true,
-      "headingIds": true
-    },
-    "anchors": {
-      "maintainCase": false
-    }
-  },
   "i18n": {
     "defaultLocale": "ru",
     "locales": [
@@ -45,7 +28,7 @@ export default {
       {
         "docs": {
           "sidebarPath": "/Users/sashadashkevich/Desktop/smart-home-planner/sidebars.js",
-          "routeBasePath": "/"
+          "routeBasePath": "/docs"
         },
         "blog": false,
         "theme": {
@@ -59,7 +42,7 @@ export default {
         "specs": [
           {
             "id": "smart-planner-api",
-            "spec": "static/openapi.yaml",
+            "spec": "static/redocusaurus/openapi.yaml",
             "route": "/api-reference"
           }
         ],
@@ -81,7 +64,7 @@ export default {
         },
         {
           "to": "/api-reference",
-          "label": "API Reference",
+          "label": "API",
           "position": "left"
         },
         {
@@ -94,8 +77,35 @@ export default {
     },
     "footer": {
       "style": "dark",
-      "copyright": "Copyright © 2026 Smart Home Planner. Built with Docusaurus.",
-      "links": []
+      "links": [
+        {
+          "title": "Документация",
+          "items": [
+            {
+              "label": "Карточка продукта",
+              "to": "/docs/intro"
+            },
+            {
+              "label": "Архитектура",
+              "to": "/docs/architecture/erd"
+            },
+            {
+              "label": "API Reference",
+              "to": "/api-reference"
+            }
+          ]
+        },
+        {
+          "title": "Репозиторий",
+          "items": [
+            {
+              "label": "GitHub",
+              "href": "https://github.com/7nrtfq5dhm-ai/smart-home-planner"
+            }
+          ]
+        }
+      ],
+      "copyright": "Copyright © 2026 Smart Home Planner. Built with Docusaurus."
     },
     "prism": {
       "theme": {
@@ -367,5 +377,22 @@ export default {
   "stylesheets": [],
   "clientModules": [],
   "titleDelimiter": "|",
-  "noIndex": false
+  "noIndex": false,
+  "markdown": {
+    "format": "mdx",
+    "mermaid": false,
+    "emoji": true,
+    "mdx1Compat": {
+      "comments": true,
+      "admonitions": true,
+      "headingIds": true
+    },
+    "anchors": {
+      "maintainCase": false
+    },
+    "hooks": {
+      "onBrokenMarkdownLinks": "warn",
+      "onBrokenMarkdownImages": "throw"
+    }
+  }
 };

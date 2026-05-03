@@ -7,7 +7,6 @@ const config = {
   tagline: 'Умный планировщик домов и квартир — техническая документация',
   favicon: 'img/favicon.ico',
 
-  // Параметры для GitHub Pages
   url: 'https://7nrtfq5dhm-ai.github.io',
   baseUrl: '/smart-home-planner/',
   organizationName: '7nrtfq5dhm-ai',
@@ -15,16 +14,8 @@ const config = {
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
-  // Настройка обработки битых ссылок
   onBrokenLinks: 'warn',
-
-  // Объединяем все настройки Markdown в один блок
-  markdown: {
-    mermaid: true, // Поддержка графиков
-    hooks: {
-      onBrokenMarkdownLinks: 'warn',
-    },
-  },
+  onBrokenMarkdownLinks: 'warn',
 
   i18n: {
     defaultLocale: 'ru',
@@ -34,11 +25,10 @@ const config = {
   presets: [
     [
       'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          routeBasePath: '/', 
+          routeBasePath: '/docs',
         },
         blog: false,
         theme: {
@@ -46,14 +36,13 @@ const config = {
         },
       }),
     ],
-    // Подключаем API через Redocusaurus
     [
       'redocusaurus',
       {
         specs: [
           {
             id: 'smart-planner-api',
-            spec: 'static/openapi.yaml', 
+            spec: 'static/redocusaurus/openapi.yaml',
             route: '/api-reference',
           },
         ],
@@ -64,40 +53,57 @@ const config = {
     ],
   ],
 
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      navbar: {
-        title: 'Smart Home Planner',
-        items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'mainSidebar',
-            position: 'left',
-            label: 'Документация',
-          },
-          {
-            to: '/api-reference',
-            label: 'API Reference',
-            position: 'left',
-          },
-          {
-            href: 'https://github.com/7nrtfq5dhm-ai/smart-home-planner',
-            label: 'GitHub',
-            position: 'right',
-          },
-        ],
-      },
-      footer: {
-        style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} Smart Home Planner. Built with Docusaurus.`,
-      },
-      prism: {
-        theme: themes.github,
-        darkTheme: themes.dracula,
-        additionalLanguages: ['yaml', 'json'],
-      },
-    }),
+  themeConfig: ({
+    navbar: {
+      title: 'Smart Home Planner',
+      items: [
+        {
+          type: 'docSidebar',
+          sidebarId: 'mainSidebar',
+          position: 'left',
+          label: 'Документация',
+        },
+        {
+          to: '/api-reference',
+          label: 'API',
+          position: 'left',
+        },
+        {
+          href: 'https://github.com/7nrtfq5dhm-ai/smart-home-planner',
+          label: 'GitHub',
+          position: 'right',
+        },
+      ],
+    },
+    footer: {
+      style: 'dark',
+      links: [
+        {
+          title: 'Документация',
+          items: [
+            { label: 'Карточка продукта', to: '/docs/intro' },
+            { label: 'Архитектура', to: '/docs/architecture/erd' },
+            { label: 'API Reference', to: '/api-reference' },
+          ],
+        },
+        {
+          title: 'Репозиторий',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/7nrtfq5dhm-ai/smart-home-planner',
+            },
+          ],
+        },
+      ],
+      copyright: `Copyright © ${new Date().getFullYear()} Smart Home Planner. Built with Docusaurus.`,
+    },
+    prism: {
+      theme: themes.github,
+      darkTheme: themes.dracula,
+      additionalLanguages: ['yaml', 'json'],
+    },
+  }),
 };
 
 module.exports = config;

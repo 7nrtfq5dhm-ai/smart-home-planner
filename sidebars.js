@@ -1,17 +1,10 @@
-// @ts-check
-
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  // Название сайдбара должно совпадать с тем, что мы указали в config (mainSidebar)
   mainSidebar: [
     {
-      type: 'category',
-      label: 'Обзор проекта',
-      items: [
-        'overview/product-description',
-        'overview/business-goals',
-        'overview/stakeholders',
-      ],
+      type: 'doc',
+      id: 'intro',
+      label: 'Карточка продукта',
     },
     {
       type: 'category',
@@ -25,10 +18,17 @@ const sidebars = {
       type: 'category',
       label: 'Архитектура',
       items: [
-        'architecture/api-spec',
         'architecture/erd',
         'architecture/storage',
         'architecture/async-api',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'API',
+      items: [
+        'api/overview',
+        'api/error-codes',
       ],
     },
     {

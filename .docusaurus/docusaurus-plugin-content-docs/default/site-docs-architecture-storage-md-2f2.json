@@ -1,11 +1,11 @@
 {
   "id": "architecture/storage",
   "title": "Технологии хранения данных",
-  "description": "Сущности и паттерны взаимодействия",
+  "description": "Выбор технологий",
   "source": "@site/docs/architecture/storage.md",
   "sourceDirName": "architecture",
   "slug": "/architecture/storage",
-  "permalink": "/smart-home-planner/architecture/storage",
+  "permalink": "/smart-home-planner/docs/architecture/storage",
   "draft": false,
   "unlisted": false,
   "tags": [],
@@ -17,11 +17,11 @@
   },
   "sidebar": "mainSidebar",
   "previous": {
-    "title": "ERD (Базы данных)",
-    "permalink": "/smart-home-planner/architecture/erd"
+    "title": "ERD (Модель данных)",
+    "permalink": "/smart-home-planner/docs/architecture/erd"
   },
   "next": {
     "title": "AsyncAPI (RabbitMQ)",
-    "permalink": "/smart-home-planner/architecture/async-api"
+    "permalink": "/smart-home-planner/docs/architecture/async-api"
   }
 }
