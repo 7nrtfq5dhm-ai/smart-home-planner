@@ -1,0 +1,23 @@
+{
+  "id": "integrations/platformization",
+  "title": "Платформизация",
+  "description": "Замена компонентов публичными платформами",
+  "source": "@site/docs/integrations/platformization.md",
+  "sourceDirName": "integrations",
+  "slug": "/integrations/platformization",
+  "permalink": "/smart-home-planner/integrations/platformization",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "platformization",
+    "title": "Платформизация",
+    "sidebar_label": "Платформизация (B2B)"
+  },
+  "sidebar": "mainSidebar",
+  "previous": {
+    "title": "Sequence-диаграммы",
+    "permalink": "/smart-home-planner/integrations/sequence-diagrams"
+  }
+}

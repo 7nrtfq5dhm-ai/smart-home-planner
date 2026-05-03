@@ -1,0 +1,245 @@
+openapi: 3.0.3
+info:
+  title: Smart Home Planner API
+  version: 1.0.0
+  description: |
+    REST API для Умного планировщика домов и квартир.
+    
+    Позволяет управлять проектами, взаимодействовать с AI-помощником
+    и работать со слоями инженерных коммуникаций.
+  contact:
+    name: Smart Home Planner Team
+
+servers:
+  - url: https://api.smartplanner.com/v1
+    description: Production
+  - url: https://staging.api.smartplanner.com/v1
+    description: Staging
+
+tags:
+  - name: projects
+    description: Управление проектами
+  - name: ai
+    description: AI-команды и генерация
+  - name: layers
+    description: Инженерные слои
+
+paths:
+  /projects:
+    get:
+      tags: [projects]
+      summary: Получить список проектов пользователя
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/ProjectStatusEnum'
+      responses:
+        '200':
+          description: Список проектов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /projects/generate:
+    post:
+      tags: [ai]
+      summary: Создать проект через AI-промпт
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AICommand'
+            example:
+              commandText: "Сгенерируй квартиру 10 на 8 метров с двумя спальнями"
+      responses:
+        '201':
+          description: Задача создана, генерация запущена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          description: Превышен лимит AI-запросов
+
+  /projects/{projectId}:
+    get:
+      tags: [projects]
+      summary: Загрузить данные конкретного проекта
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: Данные проекта
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags: [projects]
+      summary: Сохранить изменения проекта
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '200':
+          description: Проект сохранён
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+
+  /projects/{projectId}/ai-commands:
+    post:
+      tags: [ai]
+      summary: Отправить текстовую команду AI-помощнику
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AICommand'
+            example:
+              commandText: "Сделай кухню больше на 2 метра"
+      responses:
+        '200':
+          description: Изменения применены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '422':
+          description: Команда неоднозначна или невыполнима
+
+  /projects/{projectId}/layers:
+    get:
+      tags: [layers]
+      summary: Получить данные инженерного слоя
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+        - name: type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [ELECTRICITY, WATER, SEWAGE]
+          description: Тип инженерного слоя
+      responses:
+        '200':
+          description: Данные слоя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EngineeringLayer'
+
+components:
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: UUID проекта
+
+  responses:
+    Unauthorized:
+      description: Не авторизован. Требуется JWT-токен.
+    NotFound:
+      description: Ресурс не найден
+
+  schemas:
+    ProjectStatusEnum:
+      type: string
+      enum:
+        - DRAFT
+        - IN_PROGRESS
+        - COMPLETED
+      description: Статус проекта
+
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+        name:
+          type: string
+          example: "Моя квартира"
+        status:
+          $ref: '#/components/schemas/ProjectStatusEnum'
+        dimensions:
+          type: object
+          properties:
+            width:
+              type: number
+              example: 10
+            length:
+              type: number
+              example: 8
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    AICommand:
+      type: object
+      required:
+        - commandText
+      properties:
+        commandText:
+          type: string
+          example: "Сделай кухню больше"
+
+    EngineeringLayer:
+      type: object
+      properties:
+        layerType:
+          type: string
+          enum: [ELECTRICITY, WATER, SEWAGE]
+        elements:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              type:
+                type: string
+                example: "socket"
+              x:
+                type: number
+              y:
+                type: number
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []

@@ -1,0 +1,27 @@
+{
+  "id": "integrations/sequence-diagrams",
+  "title": "Sequence-диаграммы",
+  "description": "SD-01: Регистрация пользователя (UC-01)",
+  "source": "@site/docs/integrations/sequence-diagrams.md",
+  "sourceDirName": "integrations",
+  "slug": "/integrations/sequence-diagrams",
+  "permalink": "/smart-home-planner/integrations/sequence-diagrams",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "sequence-diagrams",
+    "title": "Sequence-диаграммы",
+    "sidebar_label": "Sequence-диаграммы"
+  },
+  "sidebar": "mainSidebar",
+  "previous": {
+    "title": "AsyncAPI (RabbitMQ)",
+    "permalink": "/smart-home-planner/architecture/async-api"
+  },
+  "next": {
+    "title": "Платформизация (B2B)",
+    "permalink": "/smart-home-planner/integrations/platformization"
+  }
+}

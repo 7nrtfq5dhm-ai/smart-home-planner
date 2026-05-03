@@ -1,0 +1,27 @@
+{
+  "id": "architecture/erd",
+  "title": "ERD — Проектирование базы данных",
+  "description": "Ключевые связи и обоснование решений",
+  "source": "@site/docs/architecture/erd.md",
+  "sourceDirName": "architecture",
+  "slug": "/architecture/erd",
+  "permalink": "/smart-home-planner/architecture/erd",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "erd",
+    "title": "ERD — Проектирование базы данных",
+    "sidebar_label": "ERD (Базы данных)"
+  },
+  "sidebar": "mainSidebar",
+  "previous": {
+    "title": "REST API (OpenAPI)",
+    "permalink": "/smart-home-planner/architecture/api-spec"
+  },
+  "next": {
+    "title": "Хранение данных",
+    "permalink": "/smart-home-planner/architecture/storage"
+  }
+}

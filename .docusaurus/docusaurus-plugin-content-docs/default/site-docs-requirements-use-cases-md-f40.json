@@ -1,0 +1,27 @@
+{
+  "id": "requirements/use-cases",
+  "title": "Use Cases",
+  "description": "UC-01: Регистрация нового пользователя",
+  "source": "@site/docs/requirements/use-cases.md",
+  "sourceDirName": "requirements",
+  "slug": "/requirements/use-cases",
+  "permalink": "/smart-home-planner/requirements/use-cases",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "use-cases",
+    "title": "Use Cases",
+    "sidebar_label": "Use Cases (UC)"
+  },
+  "sidebar": "mainSidebar",
+  "previous": {
+    "title": "Стейкхолдеры",
+    "permalink": "/smart-home-planner/overview/stakeholders"
+  },
+  "next": {
+    "title": "FR и NFR",
+    "permalink": "/smart-home-planner/requirements/nfr-fr"
+  }
+}

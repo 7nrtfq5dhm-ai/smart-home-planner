@@ -1,0 +1,27 @@
+{
+  "id": "overview/stakeholders",
+  "title": "Стейкхолдеры",
+  "description": "Ключевые участники проекта",
+  "source": "@site/docs/overview/stakeholders.md",
+  "sourceDirName": "overview",
+  "slug": "/overview/stakeholders",
+  "permalink": "/smart-home-planner/overview/stakeholders",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "stakeholders",
+    "title": "Стейкхолдеры",
+    "sidebar_label": "Стейкхолдеры"
+  },
+  "sidebar": "mainSidebar",
+  "previous": {
+    "title": "Бизнес-цели и метрики",
+    "permalink": "/smart-home-planner/overview/business-goals"
+  },
+  "next": {
+    "title": "Use Cases (UC)",
+    "permalink": "/smart-home-planner/requirements/use-cases"
+  }
+}

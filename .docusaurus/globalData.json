@@ -1,0 +1,582 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/smart-home-planner/",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/smart-home-planner/",
+          "mainDocId": "index",
+          "docs": [
+            {
+              "id": "architecture/api-spec",
+              "path": "/smart-home-planner/architecture/api-spec",
+              "sidebar": "mainSidebar"
+            },
+            {
+              "id": "architecture/async-api",
+              "path": "/smart-home-planner/architecture/async-api",
+              "sidebar": "mainSidebar"
+            },
+            {
+              "id": "architecture/erd",
+              "path": "/smart-home-planner/architecture/erd",
+              "sidebar": "mainSidebar"
+            },
+            {
+              "id": "architecture/storage",
+              "path": "/smart-home-planner/architecture/storage",
+              "sidebar": "mainSidebar"
+            },
+            {
+              "id": "index",
+              "path": "/smart-home-planner/"
+            },
+            {
+              "id": "integrations/platformization",
+              "path": "/smart-home-planner/integrations/platformization",
+              "sidebar": "mainSidebar"
+            },
+            {
+              "id": "integrations/sequence-diagrams",
+              "path": "/smart-home-planner/integrations/sequence-diagrams",
+              "sidebar": "mainSidebar"
+            },
+            {
+              "id": "overview/business-goals",
+              "path": "/smart-home-planner/overview/business-goals",
+              "sidebar": "mainSidebar"
+            },
+            {
+              "id": "overview/product-description",
+              "path": "/smart-home-planner/overview/product-description",
+              "sidebar": "mainSidebar"
+            },
+            {
+              "id": "overview/stakeholders",
+              "path": "/smart-home-planner/overview/stakeholders",
+              "sidebar": "mainSidebar"
+            },
+            {
+              "id": "requirements/nfr-fr",
+              "path": "/smart-home-planner/requirements/nfr-fr",
+              "sidebar": "mainSidebar"
+            },
+            {
+              "id": "requirements/use-cases",
+              "path": "/smart-home-planner/requirements/use-cases",
+              "sidebar": "mainSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "mainSidebar": {
+              "link": {
+                "path": "/smart-home-planner/overview/product-description",
+                "label": "overview/product-description"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  },
+  "docusaurus-plugin-redoc": {
+    "smart-planner-api": {
+      "url": "redocusaurus/smart-planner-api.yaml",
+      "themeId": "theme-redoc",
+      "isSpecFile": true,
+      "normalizeUrl": true,
+      "spec": {
+        "openapi": "3.0.3",
+        "info": {
+          "title": "Smart Home Planner API",
+          "version": "1.0.0",
+          "description": "REST API для Умного планировщика домов и квартир.\n\nПозволяет управлять проектами, взаимодействовать с AI-помощником\nи работать со слоями инженерных коммуникаций.\n",
+          "contact": {
+            "name": "Smart Home Planner Team"
+          }
+        },
+        "servers": [
+          {
+            "url": "https://api.smartplanner.com/v1",
+            "description": "Production"
+          },
+          {
+            "url": "https://staging.api.smartplanner.com/v1",
+            "description": "Staging"
+          }
+        ],
+        "tags": [
+          {
+            "name": "projects",
+            "description": "Управление проектами"
+          },
+          {
+            "name": "ai",
+            "description": "AI-команды и генерация"
+          },
+          {
+            "name": "layers",
+            "description": "Инженерные слои"
+          }
+        ],
+        "paths": {
+          "/projects": {
+            "get": {
+              "tags": [
+                "projects"
+              ],
+              "summary": "Получить список проектов пользователя",
+              "parameters": [
+                {
+                  "name": "status",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "$ref": "#/components/schemas/ProjectStatusEnum"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Список проектов",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Project"
+                        }
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "$ref": "#/components/responses/Unauthorized"
+                }
+              }
+            }
+          },
+          "/projects/generate": {
+            "post": {
+              "tags": [
+                "ai"
+              ],
+              "summary": "Создать проект через AI-промпт",
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/AICommand"
+                    },
+                    "example": {
+                      "commandText": "Сгенерируй квартиру 10 на 8 метров с двумя спальнями"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "201": {
+                  "description": "Задача создана, генерация запущена",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Project"
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "$ref": "#/components/responses/Unauthorized"
+                },
+                "429": {
+                  "description": "Превышен лимит AI-запросов"
+                }
+              }
+            }
+          },
+          "/projects/{projectId}": {
+            "get": {
+              "tags": [
+                "projects"
+              ],
+              "summary": "Загрузить данные конкретного проекта",
+              "parameters": [
+                {
+                  "$ref": "#/components/parameters/ProjectId"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Данные проекта",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Project"
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "$ref": "#/components/responses/NotFound"
+                }
+              }
+            },
+            "put": {
+              "tags": [
+                "projects"
+              ],
+              "summary": "Сохранить изменения проекта",
+              "parameters": [
+                {
+                  "$ref": "#/components/parameters/ProjectId"
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Project"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Проект сохранён",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Project"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/projects/{projectId}/ai-commands": {
+            "post": {
+              "tags": [
+                "ai"
+              ],
+              "summary": "Отправить текстовую команду AI-помощнику",
+              "parameters": [
+                {
+                  "$ref": "#/components/parameters/ProjectId"
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/AICommand"
+                    },
+                    "example": {
+                      "commandText": "Сделай кухню больше на 2 метра"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Изменения применены",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Project"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Команда неоднозначна или невыполнима"
+                }
+              }
+            }
+          },
+          "/projects/{projectId}/layers": {
+            "get": {
+              "tags": [
+                "layers"
+              ],
+              "summary": "Получить данные инженерного слоя",
+              "parameters": [
+                {
+                  "$ref": "#/components/parameters/ProjectId"
+                },
+                {
+                  "name": "type",
+                  "in": "query",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "ELECTRICITY",
+                      "WATER",
+                      "SEWAGE"
+                    ]
+                  },
+                  "description": "Тип инженерного слоя"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Данные слоя",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/EngineeringLayer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "components": {
+          "parameters": {
+            "ProjectId": {
+              "name": "projectId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "description": "UUID проекта"
+            }
+          },
+          "responses": {
+            "Unauthorized": {
+              "description": "Не авторизован. Требуется JWT-токен."
+            },
+            "NotFound": {
+              "description": "Ресурс не найден"
+            }
+          },
+          "schemas": {
+            "ProjectStatusEnum": {
+              "type": "string",
+              "enum": [
+                "DRAFT",
+                "IN_PROGRESS",
+                "COMPLETED"
+              ],
+              "description": "Статус проекта"
+            },
+            "Project": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Моя квартира"
+                },
+                "status": {
+                  "$ref": "#/components/schemas/ProjectStatusEnum"
+                },
+                "dimensions": {
+                  "type": "object",
+                  "properties": {
+                    "width": {
+                      "type": "number",
+                      "example": 10
+                    },
+                    "length": {
+                      "type": "number",
+                      "example": 8
+                    }
+                  }
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "AICommand": {
+              "type": "object",
+              "required": [
+                "commandText"
+              ],
+              "properties": {
+                "commandText": {
+                  "type": "string",
+                  "example": "Сделай кухню больше"
+                }
+              }
+            },
+            "EngineeringLayer": {
+              "type": "object",
+              "properties": {
+                "layerType": {
+                  "type": "string",
+                  "enum": [
+                    "ELECTRICITY",
+                    "WATER",
+                    "SEWAGE"
+                  ]
+                },
+                "elements": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "socket"
+                      },
+                      "x": {
+                        "type": "number"
+                      },
+                      "y": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "securitySchemes": {
+            "BearerAuth": {
+              "type": "http",
+              "scheme": "bearer",
+              "bearerFormat": "JWT"
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "docusaurus-theme-redoc": {
+    "theme-redoc": {
+      "lightTheme": {
+        "typography": {
+          "fontFamily": "var(--ifm-font-family-base)",
+          "fontSize": "var(--ifm-font-size-base)",
+          "lineHeight": "var(--ifm-line-height-base)",
+          "fontWeightLight": "var(--ifm-font-weight-light)",
+          "fontWeightRegular": "var(--ifm-font-weight-base)",
+          "fontWeightBold": "var(--ifm-font-weight-bold)",
+          "headings": {
+            "fontFamily": "var(--ifm-heading-font-family)",
+            "fontWeight": "var(--ifm-heading-font-weight)",
+            "lineHeight": "var(--ifm-heading-line-height)"
+          },
+          "code": {
+            "fontFamily": "var(--ifm-font-family-monospace)",
+            "lineHeight": "var(--ifm-pre-line-height)"
+          }
+        },
+        "sidebar": {
+          "width": "300px",
+          "backgroundColor": "#ffffff"
+        },
+        "rightPanel": {
+          "backgroundColor": "#303846"
+        },
+        "colors": {
+          "primary": {
+            "main": "#2563EB"
+          }
+        },
+        "theme": {
+          "prism": {
+            "additionalLanguages": [
+              "scala"
+            ]
+          }
+        }
+      },
+      "darkTheme": {
+        "typography": {
+          "fontFamily": "var(--ifm-font-family-base)",
+          "fontSize": "var(--ifm-font-size-base)",
+          "lineHeight": "var(--ifm-line-height-base)",
+          "fontWeightLight": "var(--ifm-font-weight-light)",
+          "fontWeightRegular": "var(--ifm-font-weight-base)",
+          "fontWeightBold": "var(--ifm-font-weight-bold)",
+          "headings": {
+            "fontFamily": "var(--ifm-heading-font-family)",
+            "fontWeight": "var(--ifm-heading-font-weight)",
+            "lineHeight": "var(--ifm-heading-line-height)"
+          },
+          "code": {
+            "fontFamily": "var(--ifm-font-family-monospace)",
+            "lineHeight": "var(--ifm-pre-line-height)"
+          }
+        },
+        "sidebar": {
+          "width": "300px",
+          "backgroundColor": "rgb(24, 25, 26)",
+          "textColor": "#f5f6f7",
+          "arrow": {
+            "color": "#f5f6f7"
+          }
+        },
+        "colors": {
+          "text": {
+            "primary": "#f5f6f7",
+            "secondary": "rgba(255, 255, 255, 1)"
+          },
+          "gray": {
+            "50": "#FAFAFA",
+            "100": "#F5F5F5"
+          },
+          "border": {
+            "dark": "#ffffff",
+            "light": "rgba(0,0,0, 0.1)"
+          },
+          "primary": {
+            "main": "#2563EB"
+          }
+        },
+        "schema": {
+          "nestedBackground": "rgb(24, 25, 26)",
+          "typeNameColor": "rgba(255, 255, 255, 1)",
+          "typeTitleColor": "rgba(255, 255, 255, 1)"
+        },
+        "theme": {
+          "prism": {
+            "additionalLanguages": [
+              "scala"
+            ]
+          }
+        }
+      },
+      "options": {
+        "scrollYOffset": "nav.navbar",
+        "expandSingleSchemaField": true,
+        "menuToggle": true,
+        "suppressWarnings": true
+      }
+    }
+  }
+}

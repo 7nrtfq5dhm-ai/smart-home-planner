@@ -1,0 +1,27 @@
+{
+  "id": "requirements/nfr-fr",
+  "title": "Функциональные и нефункциональные требования",
+  "description": "Данный раздел содержит шаблон для описания требований. Детальное заполнение — следующий этап работы над документацией.",
+  "source": "@site/docs/requirements/nfr-fr.md",
+  "sourceDirName": "requirements",
+  "slug": "/requirements/nfr-fr",
+  "permalink": "/smart-home-planner/requirements/nfr-fr",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "nfr-fr",
+    "title": "Функциональные и нефункциональные требования",
+    "sidebar_label": "FR и NFR"
+  },
+  "sidebar": "mainSidebar",
+  "previous": {
+    "title": "Use Cases (UC)",
+    "permalink": "/smart-home-planner/requirements/use-cases"
+  },
+  "next": {
+    "title": "REST API (OpenAPI)",
+    "permalink": "/smart-home-planner/architecture/api-spec"
+  }
+}
