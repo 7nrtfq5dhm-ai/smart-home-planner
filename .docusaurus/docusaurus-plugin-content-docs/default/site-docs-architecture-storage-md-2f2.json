@@ -1,7 +1,7 @@
 {
   "id": "architecture/storage",
-  "title": "Технологии хранения данных",
-  "description": "Выбор технологий",
+  "title": "Хранение данных",
+  "description": "Сущности, акторы и характер взаимодействия",
   "source": "@site/docs/architecture/storage.md",
   "sourceDirName": "architecture",
   "slug": "/architecture/storage",
@@ -12,7 +12,7 @@
   "version": "current",
   "frontMatter": {
     "id": "storage",
-    "title": "Технологии хранения данных",
+    "title": "Хранение данных",
     "sidebar_label": "Хранение данных"
   },
   "sidebar": "mainSidebar",

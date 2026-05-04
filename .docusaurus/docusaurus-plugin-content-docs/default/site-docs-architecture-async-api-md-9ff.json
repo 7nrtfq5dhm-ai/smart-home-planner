@@ -1,7 +1,7 @@
 {
   "id": "architecture/async-api",
   "title": "AsyncAPI — RabbitMQ",
-  "description": "Зачем нужна асинхронность",
+  "description": "Проблема и решение",
   "source": "@site/docs/architecture/async-api.md",
   "sourceDirName": "architecture",
   "slug": "/architecture/async-api",

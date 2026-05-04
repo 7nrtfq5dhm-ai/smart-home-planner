@@ -1,7 +1,7 @@
 {
   "id": "api/overview",
   "title": "API Reference",
-  "description": "Интерактивная документация REST API доступна на отдельной странице.",
+  "description": "Base URL//api.smartplanner.com/v1",
   "source": "@site/docs/api/overview.md",
   "sourceDirName": "api",
   "slug": "/api/overview",

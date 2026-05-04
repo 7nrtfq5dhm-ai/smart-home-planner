@@ -42,14 +42,6 @@
       "plugin": "plugin---smart-home-planner-docusaurus-debugb-38-9e7"
     }
   },
-  "/smart-home-planner/api-reference-8ad": {
-    "__comp": "__comp---theme-api-docf-0-a-77e",
-    "__context": {
-      "plugin": "plugin---smart-home-planner-api-referencefa-1-303"
-    },
-    "specProps": "specProps---smart-home-planner-api-reference-71-b-1d8",
-    "layoutProps": "layoutProps---smart-home-planner-api-reference-529-5a9"
-  },
   "/smart-home-planner/docs-152": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {

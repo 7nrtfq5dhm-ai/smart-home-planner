@@ -4,7 +4,7 @@ const { themes } = require('prism-react-renderer');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Smart Home Planner',
-  tagline: 'Умный планировщик домов и квартир — техническая документация',
+  tagline: 'Умный планировщик домов и квартир',
   favicon: 'img/favicon.ico',
 
   url: 'https://7nrtfq5dhm-ai.github.io',
@@ -25,7 +25,7 @@ const config = {
   presets: [
     [
       'classic',
-      ({
+      {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/docs',
@@ -34,26 +34,14 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      }),
-    ],
-    [
-      'redocusaurus',
-      {
-        specs: [
-          {
-            id: 'smart-planner-api',
-            spec: 'static/redocusaurus/openapi.yaml',
-            route: '/api-reference',
-          },
-        ],
-        theme: {
-          primaryColor: '#2563EB',
-        },
       },
     ],
   ],
 
-  themeConfig: ({
+  themeConfig: {
+    colorMode: {
+      defaultMode: 'light',
+    },
     navbar: {
       title: 'Smart Home Planner',
       items: [
@@ -64,7 +52,7 @@ const config = {
           label: 'Документация',
         },
         {
-          to: '/api-reference',
+          to: '/docs/api/overview',
           label: 'API',
           position: 'left',
         },
@@ -82,17 +70,15 @@ const config = {
           title: 'Документация',
           items: [
             { label: 'Карточка продукта', to: '/docs/intro' },
+            { label: 'Требования', to: '/docs/requirements/use-cases' },
             { label: 'Архитектура', to: '/docs/architecture/erd' },
-            { label: 'API Reference', to: '/api-reference' },
+            { label: 'API', to: '/docs/api/overview' },
           ],
         },
         {
-          title: 'Репозиторий',
+          title: 'Ссылки',
           items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/7nrtfq5dhm-ai/smart-home-planner',
-            },
+            { label: 'GitHub', href: 'https://github.com/7nrtfq5dhm-ai/smart-home-planner' },
           ],
         },
       ],
@@ -101,9 +87,9 @@ const config = {
     prism: {
       theme: themes.github,
       darkTheme: themes.dracula,
-      additionalLanguages: ['yaml', 'json'],
+      additionalLanguages: ['yaml', 'json', 'bash'],
     },
-  }),
+  },
 };
 
 module.exports = config;

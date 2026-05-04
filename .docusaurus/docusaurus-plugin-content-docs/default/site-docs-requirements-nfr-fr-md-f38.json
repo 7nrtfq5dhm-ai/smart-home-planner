@@ -1,6 +1,6 @@
 {
   "id": "requirements/nfr-fr",
-  "title": "Функциональные и нефункциональные требования",
+  "title": "FR и NFR",
   "description": "Функциональные требования (FR)",
   "source": "@site/docs/requirements/nfr-fr.md",
   "sourceDirName": "requirements",
@@ -12,7 +12,7 @@
   "version": "current",
   "frontMatter": {
     "id": "nfr-fr",
-    "title": "Функциональные и нефункциональные требования",
+    "title": "FR и NFR",
     "sidebar_label": "FR и NFR"
   },
   "sidebar": "mainSidebar",

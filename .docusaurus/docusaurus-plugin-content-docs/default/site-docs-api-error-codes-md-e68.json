@@ -1,7 +1,7 @@
 {
   "id": "api/error-codes",
   "title": "Коды ошибок",
-  "description": "HTTP-статусы",
+  "description": "Формат ошибки",
   "source": "@site/docs/api/error-codes.md",
   "sourceDirName": "api",
   "slug": "/api/error-codes",

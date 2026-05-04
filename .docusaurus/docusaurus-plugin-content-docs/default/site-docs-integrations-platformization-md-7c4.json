@@ -1,7 +1,7 @@
 {
   "id": "integrations/platformization",
   "title": "Платформизация",
-  "description": "Внешние платформы",
+  "description": "Замена компонентов на внешние платформы",
   "source": "@site/docs/integrations/platformization.md",
   "sourceDirName": "integrations",
   "slug": "/integrations/platformization",

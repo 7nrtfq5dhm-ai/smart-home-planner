@@ -1,7 +1,7 @@
 {
   "id": "architecture/erd",
   "title": "ERD — Модель данных",
-  "description": "Основные таблицы и связи",
+  "description": "Обоснование ключевых решений",
   "source": "@site/docs/architecture/erd.md",
   "sourceDirName": "architecture",
   "slug": "/architecture/erd",

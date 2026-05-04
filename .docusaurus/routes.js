@@ -38,11 +38,6 @@ export default [
     exact: true
   },
   {
-    path: '/smart-home-planner/api-reference',
-    component: ComponentCreator('/smart-home-planner/api-reference', '8ad'),
-    exact: true
-  },
-  {
     path: '/smart-home-planner/docs',
     component: ComponentCreator('/smart-home-planner/docs', '152'),
     routes: [

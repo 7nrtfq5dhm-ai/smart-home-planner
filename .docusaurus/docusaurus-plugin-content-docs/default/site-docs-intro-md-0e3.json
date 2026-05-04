@@ -1,7 +1,7 @@
 {
   "id": "intro",
-  "title": "Smart Home Planner",
-  "description": "Карточка продукта",
+  "title": "Карточка продукта",
+  "description": "Версия Production · Обновлено: 2025-05-01",
   "source": "@site/docs/intro.md",
   "sourceDirName": ".",
   "slug": "/intro",
@@ -12,9 +12,8 @@
   "version": "current",
   "frontMatter": {
     "id": "intro",
-    "title": "Smart Home Planner",
-    "sidebar_label": "Карточка продукта",
-    "slug": "/intro"
+    "title": "Карточка продукта",
+    "sidebar_label": "🏠 Карточка продукта"
   },
   "sidebar": "mainSidebar",
   "next": {

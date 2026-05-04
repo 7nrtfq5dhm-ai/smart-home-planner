@@ -1,7 +1,7 @@
 {
   "id": "integrations/sequence-diagrams",
   "title": "Sequence-диаграммы",
-  "description": "SD-01 — Регистрация пользователя",
+  "description": "SD-01 — Регистрация пользователя (UC-01)",
   "source": "@site/docs/integrations/sequence-diagrams.md",
   "sourceDirName": "integrations",
   "slug": "/integrations/sequence-diagrams",

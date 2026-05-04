@@ -5,7 +5,7 @@
  */
 export default {
   "title": "Smart Home Planner",
-  "tagline": "Умный планировщик домов и квартир — техническая документация",
+  "tagline": "Умный планировщик домов и квартир",
   "favicon": "img/favicon.ico",
   "url": "https://7nrtfq5dhm-ai.github.io",
   "baseUrl": "/smart-home-planner/",
@@ -35,24 +35,14 @@ export default {
           "customCss": "/Users/sashadashkevich/Desktop/smart-home-planner/src/css/custom.css"
         }
       }
-    ],
-    [
-      "redocusaurus",
-      {
-        "specs": [
-          {
-            "id": "smart-planner-api",
-            "spec": "static/redocusaurus/openapi.yaml",
-            "route": "/api-reference"
-          }
-        ],
-        "theme": {
-          "primaryColor": "#2563EB"
-        }
-      }
     ]
   ],
   "themeConfig": {
+    "colorMode": {
+      "defaultMode": "light",
+      "disableSwitch": false,
+      "respectPrefersColorScheme": false
+    },
     "navbar": {
       "title": "Smart Home Planner",
       "items": [
@@ -63,7 +53,7 @@ export default {
           "label": "Документация"
         },
         {
-          "to": "/api-reference",
+          "to": "/docs/api/overview",
           "label": "API",
           "position": "left"
         },
@@ -86,17 +76,21 @@ export default {
               "to": "/docs/intro"
             },
             {
+              "label": "Требования",
+              "to": "/docs/requirements/use-cases"
+            },
+            {
               "label": "Архитектура",
               "to": "/docs/architecture/erd"
             },
             {
-              "label": "API Reference",
-              "to": "/api-reference"
+              "label": "API",
+              "to": "/docs/api/overview"
             }
           ]
         },
         {
-          "title": "Репозиторий",
+          "title": "Ссылки",
           "items": [
             {
               "label": "GitHub",
@@ -301,7 +295,8 @@ export default {
       },
       "additionalLanguages": [
         "yaml",
-        "json"
+        "json",
+        "bash"
       ],
       "magicComments": [
         {
@@ -313,11 +308,6 @@ export default {
           }
         }
       ]
-    },
-    "colorMode": {
-      "defaultMode": "light",
-      "disableSwitch": false,
-      "respectPrefersColorScheme": false
     },
     "docs": {
       "versionPersistence": "localStorage",
