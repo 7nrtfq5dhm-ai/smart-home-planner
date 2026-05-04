@@ -3,41 +3,6 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
-    path: '/smart-home-planner/__docusaurus/debug',
-    component: ComponentCreator('/smart-home-planner/__docusaurus/debug', 'dfa'),
-    exact: true
-  },
-  {
-    path: '/smart-home-planner/__docusaurus/debug/config',
-    component: ComponentCreator('/smart-home-planner/__docusaurus/debug/config', '1b5'),
-    exact: true
-  },
-  {
-    path: '/smart-home-planner/__docusaurus/debug/content',
-    component: ComponentCreator('/smart-home-planner/__docusaurus/debug/content', '39c'),
-    exact: true
-  },
-  {
-    path: '/smart-home-planner/__docusaurus/debug/globalData',
-    component: ComponentCreator('/smart-home-planner/__docusaurus/debug/globalData', 'c6e'),
-    exact: true
-  },
-  {
-    path: '/smart-home-planner/__docusaurus/debug/metadata',
-    component: ComponentCreator('/smart-home-planner/__docusaurus/debug/metadata', '3d9'),
-    exact: true
-  },
-  {
-    path: '/smart-home-planner/__docusaurus/debug/registry',
-    component: ComponentCreator('/smart-home-planner/__docusaurus/debug/registry', '24c'),
-    exact: true
-  },
-  {
-    path: '/smart-home-planner/__docusaurus/debug/routes',
-    component: ComponentCreator('/smart-home-planner/__docusaurus/debug/routes', '7f3'),
-    exact: true
-  },
-  {
     path: '/smart-home-planner/docs',
     component: ComponentCreator('/smart-home-planner/docs', '152'),
     routes: [
